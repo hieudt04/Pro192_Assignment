@@ -12,8 +12,8 @@ public class Menu {
     
     public static <E> int int_getChoice(ArrayList<E> options){
         
-        boolean check = true;
-        String line = "";
+        boolean check = true;  //bien ktra tinh hop le khi nhap
+        String line = "";      //bien luu lua chon nguoi nhap
         
         for(int i = 0; i < options.size(); ++i) System.out.println((i+1) + "-" + options.get(i));
         
@@ -32,8 +32,8 @@ public class Menu {
     }
     
     public static <E> E ref_getChoice(ArrayList<E> options){
-        int response;
-        int n = options.size();
+        int response;  //biến lưu trữ lựa chọn trả về
+        int n = options.size(); //biến lưu trữ số ptu options
         do{
             response = int_getChoice(options);
         } while(response < 0 || response > n);
@@ -41,7 +41,7 @@ public class Menu {
         return options.get(response);
     }
     
-        
+//    Kiểm tra nhập rỗng    
     public static String inputNonBlankStr(String msg, String name){
         String data;
         
@@ -66,7 +66,7 @@ public class Menu {
         
         return data;
     }
-    
+//    Kiểm tra chuỗi nhập khớp với mẫu 
     public static String inputPattern(String msg, String pattern, String answer){
         String data;
         
@@ -78,7 +78,7 @@ public class Menu {
         
         return data;
     }
-    
+//    Kiểm tra số nhập hợp lệ 
     public static double inputDouble(String msg, String name){
         double price = 0;
         String line = "";
@@ -100,3 +100,4 @@ public class Menu {
     }
    
 }
+
