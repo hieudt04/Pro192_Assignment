@@ -29,24 +29,25 @@ public class CarManager {
         ops.add("Exit");
       
         
-        int choice;
+        int choice;        //biến chọn
         
         do{
-            System.out.println(); choice = Menu.int_getChoice(ops);
+            System.out.println();
+            choice = Menu.int_getChoice(ops);
             
             switch(choice){
-                case 0: brandList.listBrands();                                     break;
-                case 1: brandList.addBrand();                                       break;
-                case 2: brandList.searchBrand();                                    break;
-                case 3: brandList.updateBrand();    carList.updateCar();            break;
-                case 4: brandList.saveToFile("brands.txt");                         break;
-                case 5: carList.listCars();                                         break;
-                case 6: carList.printBasedBrandName();                              break;
-                case 7: carList.addCar();                                           break;
-                case 8: carList.removeCar();                                        break;
-                case 9: carList.updateCar();                                        break;
-                case 10: carList.saveToFile("cars.txt");                            break;
-                case 11:                                                            return;                            
+                case 0: brandList.listBrands();             break;
+                case 1: brandList.addBrand();               break;
+                case 2: brandList.searchBrand();            break;
+                case 3: brandList.updateBrand();            break;
+                case 4: carList.updateCar();                break;     
+                case 5: brandList.saveToFile("brands.txt"); break;                                     
+                case 6: carList.listCars();                 break;          
+                case 7: carList.printBasedBrandName();      break;                                 
+                case 8: carList.addCar();                   break;                   
+                case 9: carList.removeCar();                break;                     
+                case 10:carList.updateCar();                break;           
+                case 11:carList.saveToFile("cars.txt");     break;                                                                                
             }
             
         } while(choice >= 0 && choice < ops.size());
