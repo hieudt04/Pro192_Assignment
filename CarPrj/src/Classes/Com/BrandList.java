@@ -15,7 +15,8 @@ import java.util.logging.Logger;
 
 public class BrandList extends ArrayList<Brand> {
     
-    public BrandList(){};
+    public BrandList(){        
+    }
     
     public boolean loadFromFile(String filename) throws IOException{
         File f = new File(filename);
@@ -30,7 +31,6 @@ public class BrandList extends ArrayList<Brand> {
                 String[] e = line.split("[,:]+");
                 double price = Double.parseDouble(e[3]);
                 this.add(new Brand(e[0], e[1], e[2], price));
-                //System.out.println(new Brand(e[0], e[1], e[2], price));
             }
             
         } catch (FileNotFoundException ex) {
@@ -38,6 +38,55 @@ public class BrandList extends ArrayList<Brand> {
         }
        
         return true;
+    }
+    //task 1
+    public void listBrands(){
+        int n = this.size();
+        for(int i = 0; i < n; ++i)  System.out.println(this.get(i));
+    }
+    //task 2
+    public void addBrand(){
+        String nID, nBrandName, nSoundBrand;
+        double nPrice;
+        
+        Scanner sc = new Scanner(System.in);
+        
+        do{
+            nID = Menu.inputNonBlankStr("Enter Brand ID: ", "Brand ID");
+            if(searchID(nID) > -1) System.out.println("Brand ID can not be duplicated.");
+        } while (searchID(nID) > -1);
+        
+        nBrandName = Menu.inputNonBlankStr("Enter Brand Name: ", "Brand name");
+        nSoundBrand = Menu.inputNonBlankStr("Enter Sound Brand: ", "Sound manufacturer");
+        nPrice = Menu.inputDouble("Enter Price: ", "Price");
+        
+        this.add(new Brand(nID, nBrandName, nSoundBrand, nPrice));
+        
+    }
+    //task 3
+    //tìm id trước
+    public int searchID(String bID){
+        int n = this.size();
+        
+        for(int i = 0; i < n; ++i) 
+            if(this.get(i).getBrandID().equals(bID)) return i;
+        
+        return -1;
+    }
+    //tìm brand dựa trên id đã tìm được
+    public void searchBrand(){
+        Scanner sc = new Scanner(System.in);
+        String iID;  //lưu giữ brand ID
+        int pos;     //vị trí của brand
+        
+        do{
+            iID = Menu.inputNonBlankStr("Your Brand ID your want to search: ", "Brand ID");
+            pos = searchID(iID);
+            if(pos == -1) System.out.println("Not found");
+        } while (searchID(iID) == -1);
+        
+        System.out.println(get(pos));
+        
     }
     
     public boolean saveToFile(String filename){
@@ -53,38 +102,13 @@ public class BrandList extends ArrayList<Brand> {
         return true;
     }
     
-    public int searchID(String bID){
-        int n = this.size();
-        
-        for(int i = 0; i < n; ++i) 
-            if(this.get(i).getBrandID().equals(bID)) return i;
-        
-        return -1;
-    }
+    
     
     public Brand getUserChoice(){
         return (Brand) Menu.<Brand> ref_getChoice(this);
     }
     
-    public void addBrand(){
-        String nID, nBrandName, nSoundBrand;
-        double nPrice;
-        
-        Scanner sc = new Scanner(System.in);
-        
-        //Take Input
-        do{
-            nID = Menu.inputNonBlankStr("Enter Brand ID: ", "Brand ID");
-            if(searchID(nID) > -1) System.out.println("Brand ID can not be duplicated.");
-        } while (searchID(nID) > -1);
-        
-        nBrandName = Menu.inputNonBlankStr("Enter Brand Name: ", "Brand name");
-        nSoundBrand = Menu.inputNonBlankStr("Enter Sound Brand: ", "Sound manufacturer");
-        nPrice = Menu.inputDouble("Enter Price: ", "Price");
-        
-        this.add(new Brand(nID, nBrandName, nSoundBrand, nPrice));
-        
-    }
+    
     
     public void updateBrand(){
         String iID;
@@ -111,23 +135,9 @@ public class BrandList extends ArrayList<Brand> {
         
     }
     
-    public void searchBrand(){
-        Scanner sc = new Scanner(System.in);
-        String iID;
-        int pos;
-        
-        do{
-            iID = Menu.inputNonBlankStr("Your Brand ID your want to search: ", "Brand ID");
-            pos = searchID(iID);
-            if(pos == -1) System.out.println("Not found");
-        } while (searchID(iID) == -1);
-        
-        System.out.println(this.get(pos));
-        
-    }
     
-    public void listBrands(){
-        int n = this.size();
-        for(int i = 0; i < n; ++i)  System.out.println(this.get(i));
-    }
+    
+    
+    
+    
 }
